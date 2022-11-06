@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary: #FB9400;
+    --color-secundary: #000;
+    --box-shadow: (10px 0 30px 0 rgba(0, 0, 1, 0.11));
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist';
+    overflow-x: hidden;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+
+/*-------------MENU-------------*/
+
+
+.container_menu {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(180%, -50%);
+
+}
+
+.content_menu {
+    display: flex;
+    background-color: var(--color-primary);
+    padding: 1em;
+    width: 1em;
+    height: 1em;
+    border-radius: 100px;
+    padding: 17px;
+    text-align: center;
+    align-items: center;
+    font-size: 27px;
+}
+
+
+
+
+/*---------OPTIONS--------*/
+.title_name {
+    margin-left: 1em;
+}
+
+
+.img_option {
+    width: 26%;
+}
+
+
+.container_option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.content_option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    width: 279px;
+    height: 170px;
+    padding: 1em;
+    margin-left: 3em;
+    margin-right: 3em;
+    margin-bottom: 2em;
+
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+.btn_option {
+    padding: 10px 20px;
+    width: 155px;
+    height: 36px;
+    text-align: center;
+    background-color: var(--color-primary);
+    border-radius: 5px;
+
+}
+
+.btn_option i,
+.btn_option span {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.btn_option span {
+    margin-left: .3em;
+}
