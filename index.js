@@ -20,25 +20,39 @@ app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({extended:false}))
 
 
-// Rotas 
+/* ROTAS */
+
+/* INICIO GET INDEX */
 app.get('/', (req, res) => {
     res.render('index')
 })
+/* FIM GET INDEX */
 
-app.get('/servicos', (req, res) => {
-    Servico.findAll()
+
+/* INICIO GET SERVICOS */
+app.get('/servicos', async (req, res) => {
+    const { count, rows } = await Servico.findAndCountAll()
+    let numServicos = count
+
+    await Servico.findAll()
     .then((servicos) => {
         res.render('servicos', { 
-            servicos: servicos.map((servicos) => servicos.toJSON() )
+            servicos: servicos.map((servicos) => servicos.toJSON() ),
+            numServicos: numServicos
          })
     })
     .catch((err) => console.log(err))
 })
+/* FIM GET SERVICOS */
 
+
+/* INICIO GET NOVO SERVICO */
 app.get('/novoservico', (req, res) => {
     res.render('novoServico')
 })
+/* FIM GET NOVO SERVICO */
 
+/* INICIO POST SERVICOS */
 app.post('/cadServico', (req, res) => {
     //Valores vindos do formulário
     let nome = req.body.nome
@@ -79,6 +93,8 @@ app.post('/cadServico', (req, res) => {
         console.log(`Ops, houve um erro: ${err}`)
     })
 })
+/* FIM POST SERVICOS */
+
 
 
 
