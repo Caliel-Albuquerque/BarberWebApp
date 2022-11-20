@@ -1,6 +1,6 @@
 const db = require('./db')
 
-const Usuario = db.sequelize.define('cliente', {
+const Cliente = db.sequelize.define('cliente', {
     idCliente: {
         type: db.Sequelize.INTEGER,
         autoIncrement: true,
@@ -25,6 +25,6 @@ const Usuario = db.sequelize.define('cliente', {
     }
 }) 
 
-Usuario.sync()
+Cliente.sync()
 
-module.exports = Usuario
+module.exports = Cliente
