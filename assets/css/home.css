@@ -116,3 +116,60 @@ a{
 .btn_option span {
     margin-left: .3em;
 }
+
+.container_sidebar{
+    position: fixed;
+    top: 0;
+    height: 100%;
+    background-color: #000;
+    left: -100%;
+    transition: .5s all ease-in-out;
+}
+
+.ativar_menu{
+    left: 0;
+}
+
+
+.content_header{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    color: #fff;
+    font-size: 12px;
+
+    margin-top: .8em;
+
+    border-bottom: solid 2px #FB9400;
+}
+
+.iconMenu{
+    font-size: 28px;
+    color: #fff;
+}
+
+.content_sidebar ul{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    height: 100%;
+}
+
+.container_sidebar ul li{
+    display: flex;
+    align-items: center;
+    margin-top: 1.2em;
+    margin-right: .8em;
+}
+
+.container_sidebar ul li a{
+    margin-left: 15px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.border {
+    border: 2px solid black;
+}
