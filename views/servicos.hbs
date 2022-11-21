@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="row border mb-5 d-flex flex">
-        <div class="col-2 pr-4 border d-flex justify-content-center">
-            <a href="/">
+    <div class="row mb-5 d-flex flex">
+        <div class="col-2 pr-4 d-flex justify-content-center">
+            <a href="/" class="">
                 <i class="fas fa-long-arrow-alt-left fa-2x"></i>
             </a> 
         </div>
-        <div class="col-10 pl-3 border">
+        <div class="col-10 pl-3">
             <h3>Serviços predefinidos</h3>
         </div>
     </div>
@@ -21,27 +21,61 @@
         <p>Ordenado por valor<sup>*</sup></p>
     </div>
     {{#each servicos}}
-        <div class="row border py-3 mb-5">
-        <div class="col-6 d-flex justify-content-center">
-            <h4>{{nome}}</h4>
-        </div>
+        <div class="row border py-3 mb-4 d-flex align-items-center bg-white">
+            <div class="col-4 d-flex justify-content-center">
+                <h5>{{nome}}</h5>
+            </div>
 
-        <div class="col-5 d-flex justify-content-center">
-            <h4>R$ {{valor}}</h4>
-        </div>
+            <div class="col-4 d-flex justify-content-center">
+                <h5>R$ {{valor}}</h5>
+            </div>
 
-        <div class="col-1">
-            <i class="fas fa-caret-right fa-2x"></i>
-        </div>
+            <div class="col-2 d-flex justify-content-center">
+                <form action="/editarServico" method="put">
+                    <input type="hidden" name="idServico" value="{{idServico}}">
+                    <button class="btn"><i class="fas fa-edit"></i></button>
+                </form>
+            </div>
         
-    </div>
+            <div class="col-2 d-flex justify-content-center">
+                    <button
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteModal_{{idServico}}" 
+                        class="btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+            </div>  
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal_{{idServico}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CONFIRMAÇÃO</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body fw-bold text-danger">
+                Tem certeza que quer deletar o servico {{nome}}?
+              </div>
+              <div class="modal-footer">
+                <form action="/deletarServico" method="delete">
+                  <input type="hidden" name="idServico" value="{{idServico}}">
+                  <button type="submit" class="btn btn-danger">Sim, quero deletar!</button>
+                </form>
+                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
     {{/each}}
 
     <div class="row d-flex justify-content-center mb-5">
         <h6>{{numServicos}} registros no total</h6>
     </div>
 
-    <div class="row border d-flex align-items-center mt-5">
+    <div class="row border d-flex align-items-center mt-5 bg-white">
         <a href="/" class="col-4 py-3">
             <div class="d-flex flex-column align-items-center">
             <i class="fas fa-bars fa-2x"></i>
