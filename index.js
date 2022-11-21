@@ -95,6 +95,21 @@ app.post('/cadServico', (req, res) => {
 })
 /* FIM POST SERVICOS */
 
+/* INICIO DELETE SERVICO */
+app.delete('/deletarServico', async (req, res) => {
+    let idServico = req.body.idServico
+    await Servico.destroy({
+        where:{
+            idServico: idServico
+        }
+    }).then(() => {
+        return res.redirect('/servicos')
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
+
 
 
 
