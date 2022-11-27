@@ -1,46 +1,29 @@
-
-<center>
-    <div class="container">
-        <img src="img/logo.png" alt="Logo">
-        <div class="container.login"></div>
-        <div class="wrap.login"></div>
-        <form>
-            <span class="login.form.title">
-                Faça o login
-            </span>
-
-            <div class="wrap.input margin-top 35 margin-bottom-35">
-                <input class="form" type="email" name="email" autocomplete="off">
-                <span class="focus.input" data.placeholder="E-mail"></span>
-            </div>
-
-            <div class="wrap.input margin-bottom-35">
-                <input class="form" type="password" name="password">
-                <span class="focus.input" data.placeholder="Senha"></span>
-
-                <div class="container.login.bt">
-                    <a href="/home" class="btn_option">Entrar</a>
-                    
-                </div>
-                <ul class="utilidades">
-                    <li class="margin-top-8">
-                        <span class="texto1">
-                        </span>
-                        <a href="https://www.youtube.com/">
-                            Entar com telefone
-                        </a>
-                    </li>
-                    <!--Colocar o link da pagina de recuperar senha-->
-                    <li class="margin-top-8">
-                        <span class="texto2">
-                        </span>
-                        <a href="https://www.youtube.com/">
-                            Esqueceu sua senha?
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </form>
+<div class="container">
+    <img class="logo_login" src="img/logo.png" alt="Logo">
+    <div class="container_information">
+        <h1>Seja bem-vindo(a)</h1>
+        <p class="text">Informe seus dados para continuar</p>
     </div>
-</center>
 
+    <form class="form_login" action="">
+        <div class="content_inputs">
+            <i class="uil uil-user"></i>
+            <input class="form" type="email" name="email" autocomplete="off" placeholder="Seu email">
+        </div>
+
+        <div class="content_inputs">
+            <i class="uil uil-lock"></i>
+            <input class="form" type="password" name="password" placeholder="Sua senha">
+        </div>
+
+        <div class="lost_passWord">
+            <a href="#" class="link_text">Entrar com telefone</a>
+            <a href="#" class="link_text">Esqueceu a senha ?</a>
+        </div>
+
+        <a href="/home" class="btn_option btn_login">Entrar</a>
+        <p class="text">Não possui conta? <a href = "" class="link_registration">Cria a sua agora!</a></p>
+
+    </form>
+
+</div>

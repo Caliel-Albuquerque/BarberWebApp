@@ -5,6 +5,7 @@
 :root {
     --color-primary: #FB9400;
     --color-secundary: #000;
+    --color-text: #8f9eb2;
     --box-shadow: (10px 0 30px 0 rgba(0, 0, 1, 0.11));
 }
 
@@ -30,6 +31,16 @@ a{
     text-decoration: none;
     
 }
+
+
+/*------------BASICS----------*/
+
+.text{
+    color: var(--color-text) ;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
 
 /*-------------MENU-------------*/
 
@@ -98,23 +109,25 @@ a{
 }
 
 .btn_option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     padding: 10px 20px;
     width: 155px;
     height: 36px;
-    text-align: center;
     background-color: var(--color-primary);
     border-radius: 5px;
-
-}
-
-.btn_option i,
-.btn_option span {
-    font-weight: 700;
     font-size: 17px;
+    font-weight: 700;
+    color: #000;
 }
 
-.btn_option span {
-    margin-left: .3em;
+
+
+.btn_option i {
+    margin-right: .3em;
+    font-size: 18px;
 }
 
 .container_sidebar{
