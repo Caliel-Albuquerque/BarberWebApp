@@ -20,7 +20,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:false}))
 
 
-// app.use(express.static(path.join(__filename, '/public')));
+
 
 /* ROTAS */
 
