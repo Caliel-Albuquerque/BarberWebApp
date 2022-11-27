@@ -26,6 +26,10 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 /* INICIO GET INDEX */
 app.get('/', (req, res) => {
+    res.render('login')
+})
+
+app.get('/home', (req, res) => {
     res.render('index')
 })
 /* FIM GET INDEX */
