@@ -1,7 +1,7 @@
 {
   "name": "barberwebapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "* express [npm install --save express];\r * sequelize mysql2 [npm install sequelize mysql2 --save];\r * nodemon [npm install --save-dev nodemon];",
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +20,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
