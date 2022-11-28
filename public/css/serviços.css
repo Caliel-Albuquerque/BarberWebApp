@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700;800&display=swap');
+@import url('./home.css');
+
+:root{
+    --color-primary:#FB9400;
+    --color-secundary:#000;
+    --box-shadow: (10px 0 30px 0 rgba(0, 0, 1, 0.11));
+}
+
+
+.header_back{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header_back h1{
+    font-size: 24px;
+    color: #000;
+}
+
+.header_back i{
+    margin-left: 1rem;
+}
+
+.btn_search{
+    background-color: transparent;
+}
+
+.option_card{
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin-top: 2rem;
+
+    width: calc(100% - 5rem);
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(4, 6, 15, 0.05);
+    border-radius: 16px;
+    
+}
+
+.edit_item {
+    align-items: center;
+}
+
+.update_item{
+    margin-left: .6rem;
+}
+
+.update_item button, .delete_item  button{
+    background-color: transparent;
+
+}
+
+.modal{
+    display: none;
+}
+
+.ativado{
+    display: block;
+}

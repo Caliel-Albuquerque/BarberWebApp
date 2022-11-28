@@ -46,11 +46,6 @@
     width: 74%;
 }
 
-.content_inputs input{
-    border: none;
-    outline: none;
-
-}
 
 .content_inputs input::placeholder{
     color: #cad6e2;

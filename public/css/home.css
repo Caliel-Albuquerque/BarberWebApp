@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700;800&display=swap');
 @import url('./Sidebar.css');
+@import url('./serviços.css');
 
 
 :root {
@@ -11,16 +12,16 @@
 
 html,
 body {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Urbanist';
-    overflow-x: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Urbanist' !important;
+    overflow-x: hidden !important;
 }
 
 button {
-    outline: none;
-    border: none;
+    outline: none !important;
+    border: none !important;
 }
 
 ul{
@@ -28,9 +29,16 @@ ul{
 }
 
 a{
-    text-decoration: none;
+    text-decoration: none !important;
     
 }
+
+input{
+    outline: none !important;
+    border: none !important;
+}
+
+
 
 
 /*------------BASICS----------*/
@@ -39,6 +47,23 @@ a{
     color: var(--color-text) ;
     font-size: .8rem;
     font-weight: 600;
+}
+
+
+.icon_big{
+    font-size: 35px;
+    color: #000;
+
+}
+
+.flex_row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_column{
+    display: flex;
+    flex-direction: column;
 }
 
 
