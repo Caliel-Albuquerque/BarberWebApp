@@ -1,24 +1,26 @@
 <div class="container">
-    <h3>Novo serviço predefinido</h3>
+    <h1>Novo serviço predefinido</h1>
 
     <form action="/cadServico" method="post">
     <!-- Input para NOME -->
-        <div class="row mt-5">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Informe o nome do serviço" required>
+        <div class="content_inputs">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome" name="nome" placeholder="Informe o nome do serviço" required>
         </div>
 
         <!-- Input para VALOR -->
-        <div class="row mt-5 mb-5">
+        <div class="content_inputs">
           <label for="valor" class="form-label">Valor</label>
           <input type="valor" class="form-control" id="valor" name="valor" placeholder="Informe o valor do serviço" required>
         </div>
 
         <!-- Botão de Submit -->
-        <div class="row d-flex justify-content-around mt-5">
-          <button type="button" class="btn btn-outline-secondary w-25">Cancelar</button>
+        <div class="flex_column options_add_item">
 
-          <button type="submit" class="btn btn-warning w-25">Salvar</button>
+          <a href="/servicos"><button type="button" class="btn_option">Cancelar</button></a>
+          
+
+          <button type="submit" class="btn_option">Salvar</button>
         </div>
 
       </div>

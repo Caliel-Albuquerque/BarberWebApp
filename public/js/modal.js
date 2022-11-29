@@ -28,23 +28,23 @@
 // })
 
 
-var btnServicos = document.querySelectorAll("button.btn_delete");
+// var btnServicos = document.querySelectorAll("button.btn_delete");
 
-const arrayBtn = [...btnServicos]
+// const arrayBtn = [...btnServicos]
 
-arrayBtn.map((item) => {
-    item.addEventListener("click", () => {
-        var target = $(item).data('target'); 
+// arrayBtn.map((item) => {
+//     item.addEventListener("click", () => {
+//         var target = $(item).data('target'); 
 
-        var modalTarget = $(`#deleteModal`).data('id');
+//         var modalTarget = $(`#deleteModal`).data('id');
 
-        if(target == modalTarget){
-            modalTarget.classList.add("ativado");
-        }
+//         if(target == modalTarget){
+//             modalTarget.classList.add("ativado");
+//         }
 
-        //console.log(target);
-    })
-})
+//         //console.log(target);
+//     })
+// })
 
 
 // btnServicos.forEach(function(btn){

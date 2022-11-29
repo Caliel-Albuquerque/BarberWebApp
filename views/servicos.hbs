@@ -50,9 +50,14 @@
                 </div>
 
                 <div class="delete_item">
-                    <button  data-bs-toggle="modal" data-target="#deleteModal_{{idServico}}" class="btn_delete">
-                        <i class="fas fa-trash"></i>
-                    </button>
+
+                    <a href="#deleteModal_{{idServico}}" rel="modal:open">
+                        <button data-bs-toggle="modal" data-target="" class="btn_delete">
+                            <i class="fas fa-trash btn"></i>
+                        </button>
+                    </a>
+
+
                 </div>
             </div>
 
@@ -71,13 +76,13 @@
                     <div class="modal-body fw-bold text-danger">
                         Tem certeza que quer deletar o servico {{nome}}?
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer flex_row">
                         <form action="/deletarServico" method="delete">
                             <input type="hidden" name="idServico" value="{{idServico}}">
-                            <button type="submit" class="btn btn-danger">Sim, quero deletar!</button>
+                            <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
 
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn " data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -88,22 +93,22 @@
             <h6>{{numServicos}} registros no total</h6>
         </div>
 
-        <div class="row border d-flex align-items-center mt-5 bg-white">
+        <div class="bottom_bar flex_row">
             <a href="/" class="col-4 py-3">
-                <div class="d-flex flex-column align-items-center">
+                <div class="bottom_itens">
                     <i class="fas fa-bars fa-2x"></i>
                     <h5>Menu</h5>
                 </div>
             </a>
 
 
-            <div class="col-4 d-flex flex-column align-items-center py-3">
+            <div class="bottom_itens">
                 <i class="far fa-check-square fa-2x"></i>
                 <h5>Selecionar</h5>
             </div>
 
             <a href="novoServico" class="col-4 py-3">
-                <div class="d-flex flex-column align-items-center">
+                <div class="bottom_itens">
                     <i class="fas fa-plus fa-2x"></i>
                     <h5>Novo</h5>
                 </div>
