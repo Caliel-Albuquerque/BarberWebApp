@@ -343,6 +343,19 @@ app.post('/deletarCliente', (req, res) => {
     })
 })
 
+/* INICIO GET ATENDIMENTO */ 
+app.get("/atendimento", async (req, res) => {
+    
+
+    await Servico.findAll()
+    .then((servicos) => {
+        res.render('venda', { 
+            servicos: servicos.map((servicos) => servicos.toJSON() ),
+            
+         })
+    })
+    .catch((err) => console.log(err))
+})
 
 //Inicialização do Servidor
 app.listen(3000, () => {

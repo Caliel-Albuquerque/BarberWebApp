@@ -3,6 +3,7 @@
 @import url('./serviços.css');
 @import url('./login.css');
 @import url('./clientes.css');
+@import url('./atendimento.css');
 
 
 :root {
@@ -40,7 +41,10 @@ input{
     border: none !important;
 }
 
-
+select{
+    outline: none;
+    border: none;
+}
 
 
 /*------------BASICS----------*/
