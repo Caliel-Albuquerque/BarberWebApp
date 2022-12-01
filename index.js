@@ -306,6 +306,13 @@ app.post('/cadCliente', (req, res) => {
         erros.push({mensagem: "Campo valor não pode ser vazio!"})
     }
 
+    //Teste Email  
+    var re = /\S+@\S+\.\S+/; 
+
+    if(re.test(emailCliente) == false){
+        erros.push({mensagem: "Email invalido"})
+    }
+    
 
     //Sucesso (Nenhum Erro) - Salvar no BD
     Cliente.create({
@@ -321,6 +328,20 @@ app.post('/cadCliente', (req, res) => {
     })
 })
 /* FIM POST CLIENTES */
+
+/* INICIO DELETE CLIENTE */
+app.post('/deletarCliente', (req, res) => {
+    let idCliente = req.body.idCliente
+    Cliente.destroy({
+        where:{
+            idCliente: idCliente
+        }
+    }).then(() => {
+        return res.redirect('/clientes')
+    }).catch((err) => {
+        console.log(err)
+    })
+})
 
 
 //Inicialização do Servidor

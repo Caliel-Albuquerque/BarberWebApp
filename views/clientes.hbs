@@ -75,7 +75,7 @@
                     </div>
                     <div class="modal-footer flex_row">
                         <form action="/deletarCliente" method="post">
-                            <input type="hidden" name="idServico" value="{{idCliente}}">
+                            <input type="hidden" name="idCliente" value="{{idCliente}}">
                             <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
 
@@ -91,18 +91,6 @@
         </div>
 
         <div class="bottom_bar flex_row">
-            <a href="/" class="col-4 py-3">
-                <div class="bottom_itens">
-                    <i class="fas fa-bars fa-2x"></i>
-                    <h5>Menu</h5>
-                </div>
-            </a>
-
-
-            <div class="bottom_itens">
-                <i class="far fa-check-square fa-2x"></i>
-                <h5>Selecionar</h5>
-            </div>
 
             <a href="/novocliente" class="col-4 py-3">
                 <div class="bottom_itens">
@@ -110,6 +98,21 @@
                     <h5>Novo</h5>
                 </div>
             </a>
+
+        
+
+            <div class="bottom_itens">
+                <i class="far fa-check-square fa-2x"></i>
+                <h5>Selecionar</h5>
+            </div>
+
+           
+            <div class="bottom_itens" id="contentMenu">
+                <i class="fas fa-bars fa-2x"></i>
+                <h5>Menu</h5>
+            </div>
+            
+
 
         </div>
     </div>
@@ -122,3 +125,25 @@
 
 
 </section>
+
+<div class="container_sidebar" id="contentSidebar">
+
+    <div class="content_header">
+        <img src="img/userPerfil.png" alt="">
+        <h1 class="nameUser">Gustavo</h1>
+    </div>
+
+    <div class="content_sidebar">
+        <nav>
+            <ul>
+                <li><i class="uil uil-estate iconMenu"></i><a href="#">Home</a></li>
+                <li><i class="uil uil-calender iconMenu"></i><a href="#">Agenda</a></li>
+                <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
+                <li><i class="uil uil-money-bill iconMenu"></i><a href="#">Formas de pagamento</a></li>
+                <li><i class="uil uil-user iconMenu"></i><a href="#">Novo Cliente</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
