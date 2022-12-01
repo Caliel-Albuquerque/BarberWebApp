@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="update_item">
-                    <form action="/editarServico" method="put">
+                    <form action="/editarServico" method="post">
                         <input type="hidden" name="idServico" value="{{idServico}}">
                         <button class="btn"><i class="fas fa-edit"></i></button>
                     </form>
@@ -77,7 +77,7 @@
                         Tem certeza que quer deletar o servico {{nome}}?
                     </div>
                     <div class="modal-footer flex_row">
-                        <form action="/deletarServico" method="delete">
+                        <form action="/deletarServico" method="post">
                             <input type="hidden" name="idServico" value="{{idServico}}">
                             <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
