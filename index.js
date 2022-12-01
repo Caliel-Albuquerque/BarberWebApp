@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 // Importar model Cliente
 const Cliente = require('./models/Cliente')
+const Usuario = require('./models/Usuario')
 const Servico = require('./models/Servico')
 
 // Configuração do Handlebars
@@ -19,9 +20,6 @@ app.use(express.static('public'))
 
 app.use(bodyParser.urlencoded({extended:false}))
 
-
-
-
 /* ROTAS */
 
 /* INICIO GET INDEX */
@@ -31,6 +29,66 @@ app.get('/', (req, res) => {
 
 app.get('/novoUsuario', (req, res) => {
     res.render('novoUsuario')
+})
+
+app.post('/cadUsuario', (req, res) => {
+    let nome = req.body.nome
+    let tel = req.body.telefone
+    let email = req.body.email
+    let senha = req.body.senha
+
+    //Array que vai conter os erros
+    const erros = []
+
+    //Validação dos Campos
+    
+    /* Remover espaços em branco */
+    nome = nome.trim()
+    email = email.trim()
+    tel = tel.trim()
+    senha = senha.trim()
+
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
+
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({mensagem: "Campo nome não pode ser vazio!"})
+    }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if(!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({mensagem:"Nome Inválido!"})
+   }
+   
+   /* Verificar se está vazio ou não definido */
+    if (email == '' || typeof email == undefined || email == null) {
+        erros.push({mensagem: "Campo email não pode ser vazio!"})
+    }
+
+    /* Verificar se campo email é válido*/
+    if (/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.test(email)) {
+        erros.push({mensagem:"Campo email Inválido!"})
+    }
+
+    if(erros.length > 0) {
+        return res.redirect('/login')
+    }
+
+    //Sucesso (Nenhum Erro) - Salvar no BD
+    Usuario.create({
+        nome: nome,
+        telefone: tel,
+        email: email.toLowerCase(),
+        senha: senha
+    }).then(function() {
+        console.log('Cadastrado com sucesso!') 
+        return res.redirect('/home')
+    }).catch(function(err) {
+        console.log(`Ops, houve um erro: ${err}`)
+        res.redirect('/novoUsuario')
+    })
 })
 
 app.get('/home', (req, res) => {
