@@ -74,7 +74,7 @@
                         Tem certeza que quer deletar o cliente {{nome}}?
                     </div>
                     <div class="modal-footer flex_row">
-                        <form action="/deletarCliente" method="delete">
+                        <form action="/deletarCliente" method="post">
                             <input type="hidden" name="idServico" value="{{idCliente}}">
                             <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
@@ -104,7 +104,7 @@
                 <h5>Selecionar</h5>
             </div>
 
-            <a href="novocliente" class="col-4 py-3">
+            <a href="/novocliente" class="col-4 py-3">
                 <div class="bottom_itens">
                     <i class="fas fa-plus fa-2x"></i>
                     <h5>Novo</h5>
