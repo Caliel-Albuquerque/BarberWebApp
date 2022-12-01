@@ -1,4 +1,4 @@
-const express = require ('express')
+const express = require('express')
 const app = express()
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
@@ -10,7 +10,7 @@ const Servico = require('./models/Servico')
 
 // Configuração do Handlebars
 app.engine('hbs', hbs.engine({
-    extname: 'hbs', 
+    extname: 'hbs',
     defaultLayout: 'main'
 }))
 
@@ -18,7 +18,7 @@ app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
 
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 /* ROTAS */
 
@@ -103,15 +103,110 @@ app.get('/servicos', async (req, res) => {
     let numServicos = count
 
     await Servico.findAll()
-    .then((servicos) => {
-        res.render('servicos', { 
-            servicos: servicos.map((servicos) => servicos.toJSON() ),
-            numServicos: numServicos
-         })
-    })
-    .catch((err) => console.log(err))
+        .then((servicos) => {
+            res.render('servicos', {
+                servicos: servicos.map((servicos) => servicos.toJSON()),
+                numServicos: numServicos
+            })
+        })
+        .catch((err) => console.log(err))
 })
 /* FIM GET SERVICOS */
+
+/* INICIO GET CLIENTES */
+app.get('/clientes', async (req, res) => {
+    const { count, rows } = await Cliente.findAndCountAll()
+    let numCliente = count
+
+    await Cliente.findAll()
+        .then((cliente) => {
+            res.render('clientes', {
+                cliente: cliente.map((itemCliente) => itemCliente.toJSON()),
+                numCliente: numCliente
+            })
+        })
+        .catch((err) => console.log(err))
+})
+
+/* FIM GET CLIENTES*/
+
+
+/* INICIO GET NOVO CLIENTE */
+app.get('/novocliente', (req, res) => {
+    res.render('novoCliente')
+})
+/* FIM GET NOVO CLIENTE */
+
+/* INICIO POST CLIENTE */
+app.post('/cadCliente', (req, res) => {
+    //Valores vindos do formulário
+    let nome = req.body.nomeCliente
+    let celular = req.body.celularCliente
+    let aniversario =  req.body.nascimentoCliente 
+    let email = req.body.emailCliente
+
+    let erros = []
+
+
+    /* Remover espaços em branco */
+    nome = nome.trim()
+
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
+
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({ mensagem: "Campo nome não pode ser vazio!" })
+    }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({ mensagem: "Nome Inválido!" })
+    }
+
+    /* Validando email */ 
+
+    
+
+    /* Verificar se está vazio ou não definido */
+    if (celular == '' || typeof celular == undefined || celular == null) {
+        erros.push({ mensagem: "Campo valor não pode ser vazio!" })
+    }
+
+    if (email == '' || typeof email == undefined || email == null) {
+        erros.push({ mensagem: "Campo valor não pode ser vazio!" })
+    }
+
+    if (aniversario == '' || typeof aniversario == undefined || aniversario == null) {
+        erros.push({ mensagem: "Campo valor não pode ser vazio!" })
+    }
+
+
+
+    //Sucesso (Nenhum Erro) - Salvar no BD
+    Cliente.create({
+        nome: nome,
+        telefone: celular,
+        email: email,
+        data_nasc: aniversario
+    }).then(function () {
+        console.log('Cadastrado com sucesso!')
+        return res.redirect('/clientes')
+    }).catch(function (err) {
+        console.log(`Ops, houve um erro: ${err}`)
+    })
+})
+
+/* FIM POST SERVICOS */
+
+
+/* INICIO POST SERVICOS */
+app.get('/novoservico', (req, res) => {
+    res.render('novoServico')
+})
+/* FIM GET NOVO SERVICO */
+
 
 
 /* INICIO GET NOVO SERVICO */
@@ -137,27 +232,27 @@ app.post('/cadServico', (req, res) => {
 
     /* Verificar se está vazio ou não definido */
     if (nome == '' || typeof nome == undefined || nome == null) {
-        erros.push({mensagem: "Campo nome não pode ser vazio!"})
+        erros.push({ mensagem: "Campo nome não pode ser vazio!" })
     }
 
     /* Verificar se campo nome é válido (apenas letras)*/
-    if(!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
-        erros.push({mensagem:"Nome Inválido!"})
-   }
-   
-   /* Verificar se está vazio ou não definido */
+    if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({ mensagem: "Nome Inválido!" })
+    }
+
+    /* Verificar se está vazio ou não definido */
     if (valor == '' || typeof valor == undefined || valor == null) {
-        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+        erros.push({ mensagem: "Campo valor não pode ser vazio!" })
     }
 
     //Sucesso (Nenhum Erro) - Salvar no BD
     Servico.create({
         nome: nome,
         valor: valor
-    }).then(function() {
-        console.log('Cadastrado com sucesso!') 
+    }).then(function () {
+        console.log('Cadastrado com sucesso!')
         return res.redirect('/servicos')
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log(`Ops, houve um erro: ${err}`)
     })
 })
@@ -235,8 +330,13 @@ app.post('/updateServico', (req, res) => {
 /* INICIO DELETE SERVICO */
 app.post('/deletarServico', (req, res) => {
     let idServico = req.body.idServico
+<<<<<<< Updated upstream
     Servico.destroy({
         where:{
+=======
+    await Servico.destroy({
+        where: {
+>>>>>>> Stashed changes
             idServico: idServico
         }
     }).then(() => {

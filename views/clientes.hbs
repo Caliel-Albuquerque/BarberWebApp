@@ -1,0 +1,124 @@
+<section class="clientes">
+
+
+    <div class="header_back">
+
+        <div class="icon_back">
+            <a href="/home" class="">
+                <i class="uil uil-arrow-left icon_big"></i>
+            </a>
+        </div>
+        <div>
+            <a href="/home">
+                <h1>Clientes</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+
+
+        <div class="content_inputs flex_row">
+            <button class="btn_search" type="button" id="button-addon2">
+                <i class="uil uil-search"></i>
+            </button>
+            <input type="text" class="form-control" placeholder="Digite aqui para buscar"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
+        </div>
+
+        <div class="row">
+            <p>Ordenado por nome<sup>*</sup></p>
+        </div>
+        {{#each cliente}}
+        <div class="option_card flex_row">
+            <div class="col-4 d-flex justify-content-center">
+                <h5>{{nome}}</h5>
+            </div>
+
+
+            <div class="edit_item flex_row">
+
+
+                <div class="update_item">
+                    <form action="/editarServico" method="put">
+                        <input type="hidden" name="idServico" value="{{idCliente}}">
+                        <button class="btn"><i class="fas fa-edit"></i></button>
+                    </form>
+                </div>
+
+                <div class="delete_item">
+
+                    <a href="#deleteModal_{{idCliente}}" rel="modal:open">
+                        <button data-bs-toggle="modal" data-target="" class="btn_delete">
+                            <i class="fas fa-trash btn"></i>
+                        </button>
+                    </a>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="deleteModal_{{idCliente}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">CONFIRMAÇÃO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fw-bold text-danger">
+                        Tem certeza que quer deletar o cliente {{nome}}?
+                    </div>
+                    <div class="modal-footer flex_row">
+                        <form action="/deletarCliente" method="delete">
+                            <input type="hidden" name="idServico" value="{{idCliente}}">
+                            <button type="submit" class="btn">Sim, quero deletar!</button>
+                        </form>
+
+                        <button type="button" class="btn " data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+        <div class="row d-flex justify-content-center mb-5">
+            <h6>{{numCliente}} registros no total</h6>
+        </div>
+
+        <div class="bottom_bar flex_row">
+            <a href="/" class="col-4 py-3">
+                <div class="bottom_itens">
+                    <i class="fas fa-bars fa-2x"></i>
+                    <h5>Menu</h5>
+                </div>
+            </a>
+
+
+            <div class="bottom_itens">
+                <i class="far fa-check-square fa-2x"></i>
+                <h5>Selecionar</h5>
+            </div>
+
+            <a href="novocliente" class="col-4 py-3">
+                <div class="bottom_itens">
+                    <i class="fas fa-plus fa-2x"></i>
+                    <h5>Novo</h5>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</section>
