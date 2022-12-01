@@ -29,6 +29,10 @@ app.get('/', (req, res) => {
     res.render('login')
 })
 
+app.get('/novoUsuario', (req, res) => {
+    res.render('novoUsuario')
+})
+
 app.get('/home', (req, res) => {
     res.render('index')
 })
