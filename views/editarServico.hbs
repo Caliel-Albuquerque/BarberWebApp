@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Novo serviço predefinido</h1>
+
+    <form action="/updateServico" method="post">
+    <!-- Input para NOME -->
+        <div class="content_inputs">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="hidden" value="{{idServico}}" name="idServico" class="form-control">
+          <input type="text" class="form-control" id="nome" name="nome" value="{{nome}}" required>
+        </div>
+
+        <!-- Input para VALOR -->
+        <div class="content_inputs">
+          <label for="valor" class="form-label">Valor</label>
+          <input type="valor" class="form-control" id="valor" name="valor" value="{{valor}}" required>
+        </div>
+
+        <!-- Botão de Submit -->
+        <div class="flex_column options_add_item">
+
+          <a href="/servicos"><button type="button" class="btn_option">Cancelar</button></a>
+          
+          <button type="submit" class="btn_option btn">Salvar</button>
+        </div>
+    </form>
+</div>
