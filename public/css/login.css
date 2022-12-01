@@ -88,3 +88,10 @@
     color: var(--color-primary);
     font-weight: 800;
 }
+
+.label-input {
+    margin-top: 8px;
+    display: flex;
+    width: 80%;
+    font-weight: bold;
+}
