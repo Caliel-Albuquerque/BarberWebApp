@@ -101,10 +101,79 @@ app.post('/cadServico', (req, res) => {
 })
 /* FIM POST SERVICOS */
 
-/* INICIO DELETE SERVICO */
-app.delete('/deletarServico', async (req, res) => {
+// INICIO GET EDITAR-SERVICO
+app.post('/editarServico', (req, res) => {
     let idServico = req.body.idServico
-    await Servico.destroy({
+    Servico.findByPk(idServico).then((dados) => {
+        return res.render('editarServico', {
+            error: false, 
+            idServico: dados.idServico, 
+            nome: dados.nome, 
+            valor: dados.valor
+        })
+    }).catch((err) => {
+        console.log(err)
+        return res.render('editarServico', {
+            error: true, 
+            problema: 'Não é possível editar esse registro!'
+        })
+    })
+})
+// FIM GET EDITAR-SERVICO
+
+// INICIO PUT EDITAR-SERVICO
+app.post('/updateServico', (req, res) => {
+    let body = req.body
+    console.log(body)
+    //Valores vindos do formulário
+    let nome = req.body.nome
+    let valor = req.body.valor
+
+    let erros = []
+
+    /* Remover espaços em branco */
+    nome = nome.trim()
+
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
+
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({mensagem: "Campo nome não pode ser vazio!"})
+    }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if(!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({mensagem:"Nome Inválido!"})
+   }
+   
+   /* Verificar se está vazio ou não definido */
+    if (valor == '' || typeof valor == undefined || valor == null) {
+        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+    }
+
+    Servico.update({
+        nome: nome,
+        valor: valor
+    },
+    {
+        where: {
+            idServico: req.body.idServico
+        }
+    }).then((resultado) => {
+        console.log(resultado)
+        return res.redirect('/servicos')
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+// FINAL PUT EDITAR-SERVICO
+
+/* INICIO DELETE SERVICO */
+app.post('/deletarServico', (req, res) => {
+    let idServico = req.body.idServico
+    Servico.destroy({
         where:{
             idServico: idServico
         }
