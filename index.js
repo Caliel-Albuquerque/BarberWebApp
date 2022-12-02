@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const Cliente = require('./models/Cliente')
 const Usuario = require('./models/Usuario')
 const Servico = require('./models/Servico')
+const Atendimento = require('./models/Atendimento')
 
 // Configuração do Handlebars
 app.engine('hbs', hbs.engine({
