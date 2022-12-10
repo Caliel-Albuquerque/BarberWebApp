@@ -242,3 +242,30 @@ select{
         transform: translate(740%, -50%);
     }
 }
+
+@media screen and (min-width: 300px) {
+    .container_option{
+        margin-left: 0 !important;
+        
+    }
+
+    .content_option{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .container_option{
+        flex-direction: column;
+    }
+
+    .content_option{
+        width: 379px;
+        height: 250px;
+    }
+
+    .container_menu{
+        transform: translate(340%, -50%);
+    }
+}
