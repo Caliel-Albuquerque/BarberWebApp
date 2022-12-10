@@ -45,7 +45,7 @@
 .update_item button,
 .delete_item button {
     background-color: transparent;
-
+    cursor: pointer;
 }
 
 .modal-footer {
