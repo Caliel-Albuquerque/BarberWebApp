@@ -15,7 +15,7 @@ const Usuario = db.sequelize.define('usuario', {
         primaryKey: true
     },
     senha: {
-        type: db.Sequelize.STRING(8),
+        type: db.Sequelize.STRING(),
         allowNull: false
     }
 }) 
