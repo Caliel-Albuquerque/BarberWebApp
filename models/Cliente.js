@@ -20,7 +20,7 @@ const Cliente = db.sequelize.define('cliente', {
         allowNull: false
     },
     data_nasc: {
-        type: db.Sequelize.DATEONLY,
+        type: db.Sequelize.STRING(11),
         allowNull: false
     }
 }) 
