@@ -428,6 +428,90 @@ app.post('/cadCliente', async(req, res) => {
     })
 })
 
+// Exibir serviço a ser editado
+app.post('/editarCliente', async(req, res) => {
+    let idCliente = req.body.idCliente
+    await Cliente.findByPk(idCliente).then((dados) => {
+        console.log(dados)
+        return res.render('editarCliente', {
+            error: false, 
+            idCliente: dados.idCliente, 
+            nome: dados.nome,
+            email: dados.email, 
+            telefone: dados.telefone,
+            data_nasc: dados.data_nasc,
+        })
+    }).catch((err) => {
+        //console.log(err)
+        return res.render(`editarCliente`, {
+            error: true, 
+            problema: 'Não é possível editar esse registro!',
+        })
+    })
+})
+
+// Editar serviço
+app.post('/updateCliente', async(req, res) => {
+    //Valores vindos do formulário
+    const { idCliente, nome, email, telefone, data_nasc } = req.body
+
+    let erros = []
+
+    /* Remover espaços em branco */
+    nome = nome.trim()
+
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
+
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({mensagem: "Campo nome não pode ser vazio!"})
+    }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if(!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({mensagem:"Nome Inválido!"})
+   }
+   
+    /* Verificar se está vazio ou não definido */
+    if (telefone == '' || typeof telefone == undefined || telefone == null) {
+        erros.push({mensagem: "Campo Telefone não pode ser vazio!"})
+    }
+
+    if (data_nasc == '' || typeof data_nasc == undefined || data_nasc == null) {
+        erros.push({mensagem: "Campo Data Nascimento não pode ser vazio!"})
+    }
+
+    if (email == '' || typeof email == undefined || email == null) {
+        erros.push({mensagem: "Campo Email não pode ser vazio!"})
+    }
+
+    //Teste Email  
+    var re = /\S+@\S+\.\S+/; 
+
+    if(re.test(email) == false){
+        erros.push({mensagem: "Email inválido"})
+    }
+
+    await Cliente.update({
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        data_nasc: data_nasc
+    },
+    {
+        where: {
+            idCliente: idCliente
+        }
+    }).then((resultado) => {
+        console.log(resultado)
+        return res.redirect(`/clientes`)
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
 // Deletar cliente
 app.post('/deletarCliente', (req, res) => {
     let idCliente = req.body.idCliente
