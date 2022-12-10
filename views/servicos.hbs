@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="containerServico">
 
 
         <div class="content_inputs flex_row">
@@ -103,13 +103,14 @@
             </a>
 
 
-            <div class="bottom_itens">
+            {{!-- <div class="bottom_itens">
                 <i class="far fa-check-square fa-2x"></i>
                 <h5>Selecionar</h5>
-            </div>
+            </div> --}}
 
             <div class="bottom_itens" id="contentMenu">
-                <i class="fas fa-bars fa-2x"></i>
+
+                <i class="fas fa-bars fa-2x" id="icon_menu"></i>
                 <h5>Menu</h5>
             </div>
 
@@ -132,6 +133,12 @@
                         <li><i class="uil uil-user iconMenu"></i><a href="#">Novo Cliente</a></li>
                     </ul>
                 </nav>
+            </div>
+
+            <div class="content_logOut">
+                <ul>
+                    <li><i class="uil uil-sign-out-alt iconMenu"></i><a href="/">Sair</a></li>
+                </ul>
             </div>
 
         </div>
