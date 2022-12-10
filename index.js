@@ -456,6 +456,55 @@ app.get("/atendimento", async (req, res) => {
     .catch((err) => console.log(err))
 })
 
+//CADASTRO DE ATENDIMENTO
+
+app.post('/cadAtendimento', (req, res) => {
+    //Valores vindos do formulário
+    let nome = req.body.opcoesServicos
+    let valor = req.body.opcoesValor
+    let dataNascimento = req.body.dataAtendimento
+    let formaPag = req.body.opcoesPagamento
+
+    let erros = []
+
+    /* Remover espaços em branco */
+    nome = nome.trim()
+
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
+
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({mensagem: "Campo nome não pode ser vazio!"})
+    }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if(!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({mensagem:"Nome Inválido!"})
+   }
+   
+   /* Verificar se está vazio ou não definido */
+    if (valor == '' || typeof valor == undefined || valor == null) {
+        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+    }
+
+    //Sucesso (Nenhum Erro) - Salvar no BD
+    Servico.create({
+        nome: nome,
+        valor: valor,
+        data_atendimento: dataNascimento,
+        forma_pag: formaPag
+    }).then(function() {
+        console.log('Cadastrado com sucesso!') 
+        return res.redirect('/home')
+    }).catch(function(err) {
+        console.log(`Ops, houve um erro: ${err}`)
+    })
+})
+/* FIM POST ATENDIMENTO */
+
+
 //Inicialização do Servidor
 app.listen(3000, () => {
     console.log('Aplicação rodando na porta 3000!')
