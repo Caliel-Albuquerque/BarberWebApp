@@ -1,5 +1,12 @@
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('baberWebApp', 'root', 'root', {
+
+require('dotenv').config()
+const dbUrl = process.env.DB_URL 
+
+const Sequelize = require('sequelize') 
+const sequelize = new Sequelize(`${dbUrl}`)
+
+
+/*const sequelize = new Sequelize('baberWebApp', 'root', 'root', {
     host: "127.0.0.1",
     dialect: 'mysql',
     define: {
@@ -8,14 +15,13 @@ const sequelize = new Sequelize('baberWebApp', 'root', 'root', {
         timestamps: true
     },
     logging: false
-})
+})*/
 
 module.exports = {Sequelize, sequelize}
 
-/*
+
 sequelize.authenticate().then(function() {
     console.log('Conectado com Sucesso com o BD!')
 }).catch(function(err) {
     console.log('Falha ao acessar o BD:'+ err)
 })
-*/
