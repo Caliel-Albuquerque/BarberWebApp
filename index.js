@@ -369,10 +369,7 @@ app.get("/novoCliente", (req, res) => {
 // Cadastro de cliente
 app.post('/cadCliente', async(req, res) => {
     //Valores vindos do formulário
-    let nome = req.body.nomeCliente
-    let celularCliente = req.body.celularCliente
-    let aniversarioCliente = req.body.nascimentoCliente
-    let emailCliente = req.body.emailCliente
+    let { nome, email, telefone, data_nasc } = req.body
 
     let erros = []
 
@@ -394,32 +391,32 @@ app.post('/cadCliente', async(req, res) => {
    }
    
    /* Verificar se está vazio ou não definido */
-    if (celularCliente == '' || typeof celularCliente == undefined || celularCliente == null) {
-        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+    if (telefone == '' || typeof telefone == undefined || telefone == null) {
+        erros.push({mensagem: "Campo telefone não pode ser vazio!"})
     }
 
-    if (aniversarioCliente == '' || typeof aniversarioCliente == undefined || aniversarioCliente == null) {
-        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+    if (data_nasc == '' || typeof data_nasc == undefined || data_nasc == null) {
+        erros.push({mensagem: "Campo Data Nascimento não pode ser vazio!"})
     }
 
-    if (emailCliente == '' || typeof emailCliente == undefined || emailCliente == null) {
-        erros.push({mensagem: "Campo valor não pode ser vazio!"})
+    if (email == '' || typeof email == undefined || email == null) {
+        erros.push({mensagem: "Campo Email não pode ser vazio!"})
     }
 
     //Teste Email  
     var re = /\S+@\S+\.\S+/; 
 
-    if(re.test(emailCliente) == false){
-        erros.push({mensagem: "Email invalido"})
+    if(re.test(email) == false){
+        erros.push({mensagem: "Email inválido"})
     }
     
 
     //Sucesso (Nenhum Erro) - Salvar no BD
     await Cliente.create({
         nome: nome,
-        telefone: celularCliente,
-        email: emailCliente,
-        data_nasc: aniversarioCliente 
+        telefone: telefone,
+        email: email,
+        data_nasc: data_nasc 
     }).then(function() {
         console.log('Cadastrado com sucesso!') 
         return res.redirect(`/clientes`)
@@ -432,7 +429,6 @@ app.post('/cadCliente', async(req, res) => {
 app.post('/editarCliente', async(req, res) => {
     let idCliente = req.body.idCliente
     await Cliente.findByPk(idCliente).then((dados) => {
-        console.log(dados)
         return res.render('editarCliente', {
             error: false, 
             idCliente: dados.idCliente, 
@@ -442,7 +438,7 @@ app.post('/editarCliente', async(req, res) => {
             data_nasc: dados.data_nasc,
         })
     }).catch((err) => {
-        //console.log(err)
+        console.log(err)
         return res.render(`editarCliente`, {
             error: true, 
             problema: 'Não é possível editar esse registro!',
@@ -453,7 +449,7 @@ app.post('/editarCliente', async(req, res) => {
 // Editar serviço
 app.post('/updateCliente', async(req, res) => {
     //Valores vindos do formulário
-    const { idCliente, nome, email, telefone, data_nasc } = req.body
+    let { idCliente, nome, email, telefone, data_nasc } = req.body
 
     let erros = []
 
