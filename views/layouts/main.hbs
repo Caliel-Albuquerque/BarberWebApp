@@ -10,12 +10,12 @@
     <link rel="icon" href="home.png">
 
     <!-- Bootstrap CSS -->
-    
+
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     -->
-    
+
 
     <!-- Estilo Customizado-->
     <link rel="stylesheet" href="/css/home.css">
@@ -33,18 +33,21 @@
     <title>Barbearia Chatelier</title>
 </head>
 
-<body >
-    <main >
+<body>
+    <main>
         {{{body}}}
     </main>
 
 
 
     <!-- Remember to include jQuery :) -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
     {{!--
@@ -59,7 +62,20 @@
         crossorigin="anonymous"></script> --}}
     <!-- JavaScript (Opcional) -->
     <script src="../js/sidebar.js"></script>
-    
+    <!--MASCARAS-->
+    <script>
+        $(document).ready(function () {
+
+
+            //TYPE DATE
+            $("#data_nasc").inputmask("99/99/9999");
+            
+           
+
+        });
+
+
+    </script>
 
 </body>
 
