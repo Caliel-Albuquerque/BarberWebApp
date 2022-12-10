@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Novo cliente</h1>
+    <h1>Editar Cliente</h1>
 
     <form action="/updateCliente" method="post">
     <!-- Input para NOME -->
@@ -24,13 +24,13 @@
         <!-- Input para TELEFONE -->
         <div class="content_inputs">
           <label for="data_nasc" class="form-label">Data Nascimento</label>
-          <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="{{data_nasc}}" required>
+          <input type="text" class="form-control" id="data_nasc" name="data_nasc" value="{{data_nasc}}" required>
         </div>
 
         <!-- Botão de Submit -->
         <div class="flex_column options_add_item">
 
-          <a href="/servicos"><button type="button" class="btn_option">Cancelar</button></a>
+          <a href="/clientes"><button type="button" class="btn_option">Cancelar</button></a>
           
           <button type="submit" class="btn_option btn">Salvar</button>
         </div>
