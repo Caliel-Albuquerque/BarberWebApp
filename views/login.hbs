@@ -1,6 +1,4 @@
-
-
-
+{{>_msg}}
 <div class="container">
     <img class="logo_login" src="img/logo.png" alt="Logo">
     <div class="container_information">
@@ -8,7 +6,7 @@
         <p class="text">Informe seus dados para continuar</p>
     </div>
 
-    <form class="form_login" action="/home" method="get">
+    <form class="form_login" action="/" method="post">
         <div class="content_inputs">
             <i class="uil uil-user"></i>
             <input class="form" type="email" name="email" autocomplete="off" placeholder="Seu email">
@@ -16,7 +14,7 @@
 
         <div class="content_inputs">
             <i class="uil uil-lock"></i>
-            <input class="form" type="password" name="password" placeholder="Sua senha">
+            <input class="form" type="password" name="senha" placeholder="Sua senha">
         </div>
 
         <div class="lost_passWord">
@@ -24,7 +22,8 @@
             <a href="#" class="link_text">Esqueceu a senha ?</a>
         </div>
 
-        <button type="submit" class=" btn btn_option btn_login">Entrar</button>
+        <button type="submit" class=" btn btn_option btn_login">Entrar
+        </button>
         <p class="text">Não possui conta? <a href = "/novoUsuario" class="link_registration">Cria a sua agora!</a></p>
 
     </form>
