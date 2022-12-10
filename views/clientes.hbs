@@ -1,22 +1,19 @@
 <section class="clientes" >
-
-
     <div class="header_back">
 
         <div class="icon_back">
-            <a href="/home" class="">
+            <a href="/in/{{nomeUsuario}}" class="">
                 <i class="uil uil-arrow-left icon_big"></i>
             </a>
         </div>
         <div>
-            <a href="/home">
+            <a href="/in/{{nomeUsuario}}">
                 <h1>Clientes</h1>
             </a>
         </div>
     </div>
 
     <div class="container">
-
 
         <div class="content_inputs flex_row">
             <button class="btn_search" type="button" id="button-addon2">
@@ -35,30 +32,23 @@
                 <h5>{{nome}}</h5>
             </div>
 
-
             <div class="edit_item flex_row">
 
-
                 <div class="update_item">
-                    <form action="/editarServico" method="put">
+                    <form action="/editarCliente" method="post">
                         <input type="hidden" name="idServico" value="{{idCliente}}">
                         <button class="btn"><i class="fas fa-edit"></i></button>
                     </form>
                 </div>
 
                 <div class="delete_item">
-
                     <a href="#deleteModal_{{idCliente}}" rel="modal:open">
                         <button data-bs-toggle="modal" data-target="" class="btn_delete">
                             <i class="fas fa-trash btn"></i>
                         </button>
                     </a>
-
-
                 </div>
             </div>
-
-
         </div>
 
         <!-- Modal -->
@@ -92,58 +82,42 @@
 
         <div class="bottom_bar flex_row">
 
-            <a href="/novocliente" class="col-4 py-3">
+            <a href="/novoCliente" class="col-4 py-3">
                 <div class="bottom_itens">
                     <i class="fas fa-plus fa-2x"></i>
                     <h5>Novo</h5>
                 </div>
             </a>
 
-
-
             <div class="bottom_itens">
                 <i class="far fa-check-square fa-2x"></i>
                 <h5>Selecionar</h5>
             </div>
 
-
             <div class="bottom_itens" id="contentMenu">
                 <i class="fas fa-bars fa-2x"></i>
                 <h5>Menu</h5>
             </div>
-
-
-
         </div>
 
         <div class="container_sidebar" id="contentSidebar">
 
             <div class="content_header">
                 <img src="img/userPerfil.png" alt="">
-                <h1 class="nameUser">Gustavo</h1>
+                <h1 class="nameUser">{{nomeUsuario}}</h1>
             </div>
 
             <div class="content_sidebar">
                 <nav>
                     <ul>
-                        <li><i class="uil uil-estate iconMenu"></i><a href="#">Home</a></li>
+                        <li><i class="uil uil-estate iconMenu"></i><a href="/in/{{nomeUsuario}}">Home</a></li>
                         <li><i class="uil uil-calender iconMenu"></i><a href="#">Agenda</a></li>
                         <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
                         <li><i class="uil uil-money-bill iconMenu"></i><a href="#">Formas de pagamento</a></li>
-                        <li><i class="uil uil-user iconMenu"></i><a href="#">Novo Cliente</a></li>
+                        <li><i class="uil uil-user iconMenu"></i><a href="/novoCliente">Novo Cliente</a></li>
                     </ul>
                 </nav>
             </div>
-
         </div>
-
     </div>
-
-
-
-
-
-
-
-
 </section>

@@ -1,7 +1,7 @@
 
 <div class="container" id="container">
 
-    <h1 class="title_name">Olá, Gustavo</h1>
+    <h1 class="title_name">Olá, {{nomeUsuario}}</h1>
 
 
     <div class="container_option">
@@ -9,7 +9,7 @@
         <div class="content_option">
             <img class="img_option" src="img/tesouraIcon.svg" alt="" srcset="">
             <h2 class="subtitle">Novo serviço realizado?</h2>
-            <a href="/servicos" class="btn_option" ><i class="uil uil-plus"></i>Cadastre</a>
+            <a href="/servicos" class="btn_option"><i class="uil uil-plus"></i>Cadastre</a>
         </div>
 
         <div class="content_option">
@@ -42,13 +42,13 @@
 
     <div class="content_header">
         <img src="img/userPerfil.png" alt="">
-        <h1 class="nameUser">Gustavo</h1>
+        <h1 class="nameUser">{{nomeUsuario}}</h1>
     </div>
 
     <div class="content_sidebar">
         <nav>
             <ul>
-                <li><i class="uil uil-estate iconMenu"></i><a href="/home">Home</a></li>
+                <li><i class="uil uil-estate iconMenu"></i><a href="/in/{{nomeUsuario}}">Home</a></li>
                 <li><i class="uil uil-calender iconMenu"></i><a href="/atendimento">Atendimento</a></li>
                 <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
                 <li><i class="uil uil-money-bill iconMenu"></i><a href="/servicos">Formas de pagamento</a></li>
@@ -56,7 +56,6 @@
             </ul>
         </nav>
     </div>
-
 </div>
 
 
