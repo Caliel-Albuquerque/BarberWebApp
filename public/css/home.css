@@ -229,13 +229,14 @@ select{
 
     .container_option{
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         height: 80vh;
     }
 
     .content_option{
-        margin-left: 1rem;
+        margin: 2rem !important;
     }
 
     .container_menu{
@@ -243,19 +244,19 @@ select{
     }
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (min-width: 375px) {
     .container_option{
-        margin-left: 0 !important;
+        margin-left: 0 ;
         
     }
 
     .content_option{
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin-left: 0 ;
+        margin-right: 0 ;
     }
 }
 
-@media screen and (max-width: 700px) {
+/* @media screen and (max-width: 700px) {
     .container_option{
         flex-direction: column;
     }
@@ -268,4 +269,4 @@ select{
     .container_menu{
         transform: translate(340%, -50%);
     }
-}
+} */
