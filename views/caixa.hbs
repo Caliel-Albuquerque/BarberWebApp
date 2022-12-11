@@ -1,4 +1,6 @@
-<section class="servicos">
+<section class="clientes" >
+
+
     <div class="header_back">
 
         <div class="icon_back">
@@ -8,12 +10,12 @@
         </div>
         <div>
             <a href="/in/{{nomeUsuario}}">
-                <h1>Serviços predefinidos</h1>
+                <h1>Caixa</h1>
             </a>
         </div>
     </div>
 
-    <div class="container" id="containerServico">
+    <div class="container">
 
         <div class="content_inputs flex_row">
             <button class="btn_search" type="button" id="button-addon2">
@@ -24,29 +26,25 @@
         </div>
 
         <div class="row">
-            <p>Ordenado por valor<sup>*</sup></p>
+            <p>Ordenado por data<sup>*</sup></p>
         </div>
-        {{#each servicos}}
+        {{#each cliente}}
         <div class="option_card flex_row">
             <div class="col-4 d-flex justify-content-center">
                 <h5>{{nome}}</h5>
             </div>
 
             <div class="edit_item flex_row">
-                <div class="price_item">
-                    <h5>R$ {{valor}}</h5>
-                </div>
 
                 <div class="update_item">
-                    <form action="/editarServico" method="post">
-                        <input type="hidden" name="idServico" value="{{idServico}}">
-                        <button class="btn" type="submit"><i class="fas fa-edit"></i></button>
+                    <form action="/editarCliente" method="post">
+                        <input type="hidden" name="idCliente" value="{{idCliente}}">
+                        <button class="btn"><i class="fas fa-edit"></i></button>
                     </form>
                 </div>
 
                 <div class="delete_item">
-
-                    <a href="#deleteModal_{{idServico}}" rel="modal:open">
+                    <a href="#deleteModal_{{idCliente}}" rel="modal:open">
                         <button data-bs-toggle="modal" data-target="" class="btn_delete">
                             <i class="fas fa-trash btn"></i>
                         </button>
@@ -56,7 +54,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal" id="deleteModal_{{idServico}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal" id="deleteModal_{{idCliente}}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -65,11 +63,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fw-bold text-danger">
-                        Tem certeza que quer deletar o servico {{nome}}?
+                        Tem certeza que quer deletar o cliente {{nome}}?
                     </div>
                     <div class="modal-footer flex_row">
-                        <form action="/deletarServico" method="post">
-                            <input type="hidden" name="idServico" value="{{idServico}}">
+                        <form action="/deletarCliente" method="post">
+                            <input type="hidden" name="idCliente" value="{{idCliente}}">
                             <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
 
@@ -81,12 +79,12 @@
         {{/each}}
 
         <div class="row d-flex justify-content-center mb-5">
-            <h6>{{numServicos}} registros no total</h6>
+            <h6>{{numCliente}} registros no total</h6>
         </div>
 
         <div class="bottom_bar flex_row">
 
-            <a href="/novoServico" class="col-4 py-3">
+            <a href="/novoCliente" class="col-4 py-3">
                 <div class="bottom_itens">
                     <i class="fas fa-plus fa-2x"></i>
                     <h5>Novo</h5>
@@ -98,37 +96,38 @@
                 <h5>Selecionar</h5>
             </div> --}}
 
-                <div class="bottom_itens" id="contentMenu">
-                    <i class="fas fa-bars fa-2x" id="icon_menu"></i>
-                    <h5>Menu</h5>
-                </div>
-            </div>
+            <div class="bottom_itens" id="contentMenu">
 
-            <div class="container_sidebar" id="contentSidebar">
-
-                <div class="content_header">
-                    <img src="img/userPerfil.png" alt="">
-                    <h1 class="nameUser">{{nomeUsuario}}</h1>
-                </div>
-
-                <div class="content_sidebar">
-                    <nav>
-                        <ul>
-                            <li><i class="uil uil-estate iconMenu"></i><a href="/in/{{nomeUsuario}}">Home</a></li>
-                            <li><i class="uil uil-calender iconMenu"></i><a href="#">Agenda</a></li>
-                            <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
-                            {{!-- <li><i class="uil uil-money-bill iconMenu"></i><a href="#">Formas de pagamento</a></li> --}}
-                            <li><i class="uil uil-user iconMenu"></i><a href="/novoCliente">Novo Cliente</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="content_logOut">
-                    <ul>
-                        <li><i class="uil uil-sign-out-alt iconMenu"></i><a href="/">Sair</a></li>
-                    </ul>
-                </div>
-
-
+                <i class="fas fa-bars fa-2x" id="icon_menu"></i>
+                <h5>Menu</h5>
             </div>
         </div>
+
+        <div class="container_sidebar" id="contentSidebar">
+
+            <div class="content_header">
+                <img src="img/userPerfil.png" alt="">
+                <h1 class="nameUser">{{nomeUsuario}}</h1>
+            </div>
+
+            <div class="content_sidebar">
+                <nav>
+                    <ul>
+                        <li><i class="uil uil-estate iconMenu"></i><a href="/in/{{nomeUsuario}}">Home</a></li>
+                        <li><i class="uil uil-calender iconMenu"></i><a href="#">Agenda</a></li>
+                        <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
+                        {{!-- <li><i class="uil uil-money-bill iconMenu"></i><a href="#">Formas de pagamento</a></li> --}}
+                        <li><i class="uil uil-user iconMenu"></i><a href="/novoCliente">Novo Cliente</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="content_logOut">
+                <ul>
+                    <li><i class="uil uil-sign-out-alt iconMenu"></i><a href="/">Sair</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 </section>

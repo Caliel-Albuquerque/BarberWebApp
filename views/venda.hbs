@@ -4,6 +4,11 @@
     </div>
 
     <form class="form_atendimento" action="/cadAtendimento" method="post">
+        <label for="nome" class="label-input">Cliente</label>
+        <div class="content_inputs">
+            <input type="text" class="form-control" id="name_client" name="name_client" placeholder="nome do cliente" required>
+        </div>
+
         <label for="nome" class="label-input">Serviço</label>
         <div class="content_inputs">
             <select class="opcoesServicos" name="opcoesServicos" id="opcoesServicos">
@@ -30,22 +35,22 @@
         <label for="email" class="label-input">Data do atendimento</label>
         <div class="content_inputs">
 
-            <input class="opcoesDate" type="date" name="dataAtendimento">
+            <input type="text" class="form-control" id="data_nasc" name="data_nasc" placeholder="XX/XX/XXXX" required>
         </div>
 
         <label for="senha" class="label-input">Forma de pagamento</label>
         <div class="content_inputs">
             <select class="opcoesPagamento" name="opcoesPagamento" id="opcoesPagamento">
-                <option value="">Dinheiro</option>
-                <option value="">Cartão</option>
-                <option value="">Pix</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+                <option value="pix">Pix</option>
             </select>
         </div>
 
 
         <div class="flex_column options_add_item">
 
-            <a href="/in/{{nomeUsuario}}"><button type="button" class="btn_option">Cancelar</button></a>
+            <a href="/"><button type="button" class="btn_option">Cancelar</button></a>
 
 
             <button type="submit" class="btn_option">Salvar</button>
@@ -54,5 +59,5 @@
     </form>
 
 
-  
+
 </div>

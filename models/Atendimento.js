@@ -17,7 +17,7 @@ const Atendimento = db.sequelize.define('atendimento', {
         allowNull: false
     },
     data_atendimento: {
-        type: db.Sequelize.DATE,
+        type: db.Sequelize.STRING(60),
         allowNull: false
     },
     forma_pag: {

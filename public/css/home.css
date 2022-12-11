@@ -224,6 +224,32 @@ select{
     border: 2px solid black;
 }
 
+.alert{
+    position: fixed;
+    left: 0;
+    padding: 0.5rem;
+    background-color: red;
+    color: #fff;
+    font-weight: 700;
+    animation: alert 0.5s  ease-in-out;
+}
+
+@keyframes alert {
+    0%{
+        opacity: 0;
+    }
+
+    50%{
+        opacity: 0.5;
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+
+
 
 @media screen and (min-width: 768px) {
 
