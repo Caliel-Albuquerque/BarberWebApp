@@ -61,6 +61,7 @@
 
     margin-top: .8rem;
     width: calc(100% - 5rem);
+    cursor: pointer;
 }
 
 .lost_passWord a{
@@ -75,6 +76,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .link_registration{

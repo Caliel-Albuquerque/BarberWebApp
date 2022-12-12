@@ -12,6 +12,7 @@ const Cliente = require('./models/Cliente')
 const Usuario = require('./models/Usuario')
 const Servico = require('./models/Servico')
 const Atendimento = require('./models/Atendimento')
+const e = require('express')
 
 // Configuração do Handlebars
 app.engine('hbs', hbs.engine({
@@ -97,7 +98,7 @@ app.get('/novoUsuario', (req, res) => {
     if (req.session.userName) {
         res.render('novoUsuario')
     } else {
-        res.render('/')
+        res.render('login')
     }
 
 })
@@ -611,12 +612,15 @@ app.get("/atendimento", async (req, res) => {
 
 //CADASTRO DE ATENDIMENTO
 
+
 app.post('/cadAtendimento', (req, res) => {
     //Valores vindos do formulário
+
+   
     let nome = req.body.name_client
-    let valor = req.body.opcoesValor
+    let valor = PrecoValue
     let dataAtendimento = req.body.data_nasc
-    let formaPag = req.body.opcoesPagamento
+    let formaPag = FormaPagValue
 
     let erros = []
 
