@@ -96,7 +96,7 @@ app.post('/', async (req, res) => {
 // Exibir página de cadastro de usuário
 app.get('/novoUsuario', (req, res) => {
     if (req.session.userName) {
-        res.render('index')
+        res.render('novoUsuario')
     } else {
         res.render('novoUsuario')
     }
@@ -169,13 +169,13 @@ app.post('/cadUsuario', async (req, res) => {
             senha: senhaHash
         }).then(function () {
             console.log('Cadastrado com sucesso!')
-            res.redirect('/')
+            res.redirect('/login')
         }).catch(function (err) {
             console.log(`Ops, houve um erro: ${err}`)
             res.redirect('/novoUsuario')
         })
     } else {
-        res.render('/')
+        res.render('login')
     }
 
 })
