@@ -96,7 +96,7 @@ app.post('/', async (req, res) => {
 // Exibir página de cadastro de usuário
 app.get('/novoUsuario', (req, res) => {
     if (req.session.userName) {
-        res.render('novoUsuario')
+        res.render('index')
     } else {
         res.render('novoUsuario')
     }
