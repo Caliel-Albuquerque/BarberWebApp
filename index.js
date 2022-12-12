@@ -98,7 +98,7 @@ app.get('/novoUsuario', (req, res) => {
     if (req.session.userName) {
         res.render('novoUsuario')
     } else {
-        res.render('novoUsuario')
+        res.render('index')
     }
 
 })
