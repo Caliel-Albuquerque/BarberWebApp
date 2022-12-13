@@ -4,12 +4,18 @@
     </div>
 
     <form class="form_atendimento" action="/cadAtendimento" method="post">
-        <label for="nome" class="label-input">Cliente</label>
+        <label for="opcoesClientes" class="label-input">Cliente</label>
         <div class="content_inputs">
-            <input type="text" class="form-control" id="name_client" name="name_client" placeholder="nome do cliente" required>
+            <select class="opcoesServicos" name="opcoesClientes" id="opcoesClientes">
+                {{#each clientes}}
+
+                <option value="{{nome}}">{{nome}}</option>
+
+                {{/each}}
+            </select>
         </div>
 
-        <label for="nome" class="label-input">Serviço</label>
+        <label for="opcoesServicos" class="label-input">Serviço</label>
         <div class="content_inputs">
             <select class="opcoesServicos" name="opcoesServicos" id="opcoesServicos">
                 {{#each servicos}}
@@ -21,7 +27,7 @@
         </div>
 
 
-        <label for="telefone" class="label-input">Valor</label>
+        <label for="opcoesValor" class="label-input">Valor</label>
         <div class="content_inputs">
             <select class="opcoesValor" name="opcoesValor" id="opcoesValor">
                 {{#each servicos}}
@@ -32,13 +38,13 @@
             </select>
         </div>
 
-        <label for="email" class="label-input">Data do atendimento</label>
+        <label for="data_nasc" class="label-input">Data do atendimento</label>
         <div class="content_inputs">
 
             <input type="text" class="form-control" id="data_nasc" name="data_nasc" placeholder="XX/XX/XXXX" required>
         </div>
 
-        <label for="senha" class="label-input">Forma de pagamento</label>
+        <label for="opcoesPagamento" class="label-input">Forma de pagamento</label>
         <div class="content_inputs">
             <select class="opcoesPagamento" name="opcoesPagamento" id="opcoesPagamento">
                 <option value="dinheiro">Dinheiro</option>
@@ -50,7 +56,7 @@
 
         <div class="flex_column options_add_item">
 
-            <a href="/"><button type="button" class="btn_option">Cancelar</button></a>
+            <a href="/in/{{nomeUsuario}}"><button type="button" class="btn_option">Cancelar</button></a>
 
 
             <button type="submit" class="btn_option">Salvar</button>
