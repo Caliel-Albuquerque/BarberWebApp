@@ -95,88 +95,81 @@ app.post('/', async (req, res) => {
 
 // Exibir página de cadastro de usuário
 app.get('/novoUsuario', (req, res) => {
-    if (req.session.userName) {
-        res.render('novoUsuario')
-    } else {
-        res.render('novoUsuario')
-    }
-
+    res.render('novoUsuario')
 })
 
 // Cadastro de Usuário
 app.post('/cadUsuario', async (req, res) => {
-    if (req.session.userName) {
-        let nome = req.body.nome
-        let tel = req.body.telefone
-        let email = req.body.email
-        let senha = req.body.senha
+    
+    let nome = req.body.nome
+    let tel = req.body.telefone
+    let email = req.body.email
+    let senha = req.body.senha
 
-        //Array que vai conter os erros
-        const erros = []
+    //Array que vai conter os erros
+    const erros = []
 
-        //Validação dos Campos
+    //Validação dos Campos
 
-        /* Remover espaços em branco */
-        nome = nome.trim()
-        email = email.trim()
-        tel = tel.trim()
-        senha = senha.trim()
+    /* Remover espaços em branco */
+    nome = nome.trim()
+    email = email.trim()
+    tel = tel.trim()
+    senha = senha.trim()
 
-        /* Limpar caracteres especiais */
-        nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
-        nome = nome.trim()
+    /* Limpar caracteres especiais */
+    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+    nome = nome.trim()
 
-        /* Verificar se está vazio ou não definido */
-        if (nome == '' || typeof nome == undefined || nome == null) {
-            erros.push({ mensagem: "Campo nome não pode ser vazio!" })
-        }
-
-        /* Verificar se campo nome é válido (apenas letras)*/
-        if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
-            erros.push({ mensagem: "Nome Inválido!" })
-        }
-
-        /* Verificar se está vazio ou não definido */
-        if (email == '' || typeof email == undefined || email == null) {
-            erros.push({ mensagem: "Campo email não pode ser vazio!" })
-        }
-
-        /* Verificar se campo email é válido*/
-        if (/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.test(email)) {
-            erros.push({ mensagem: "Campo email Inválido!" })
-        }
-
-        const user = await Usuario.findByPk(email)
-        const userExists = user instanceof Usuario
-
-        if (userExists) {
-            erros.push({ mensagem: "Por favor, utilize outro email." })
-        }
-
-        if (erros.length > 0) {
-            return res.redirect('/novoUsuario')
-        }
-
-        // Criar senha
-        const salt = await bcrypt.genSalt(12)
-        const senhaHash = await bcrypt.hash(senha, salt)
-
-        //Sucesso (Nenhum Erro) - Salvar no BD
-        await Usuario.create({
-            nome: nome,
-            telefone: tel,
-            email: email.toLowerCase(),
-            senha: senhaHash
-        }).then(function () {
-            console.log('Cadastrado com sucesso!')
-            res.redirect('/login')
-        }).catch(function (err) {
-            console.log(`Ops, houve um erro: ${err}`)
-            res.redirect('/novoUsuario')
-        })
-    } else {
-        res.render('login')
+    /* Verificar se está vazio ou não definido */
+    if (nome == '' || typeof nome == undefined || nome == null) {
+        erros.push({ mensagem: "Campo nome não pode ser vazio!" })
     }
+
+    /* Verificar se campo nome é válido (apenas letras)*/
+    if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+        erros.push({ mensagem: "Nome Inválido!" })
+    }
+
+    /* Verificar se está vazio ou não definido */
+    if (email == '' || typeof email == undefined || email == null) {
+        erros.push({ mensagem: "Campo email não pode ser vazio!" })
+    }
+
+    /* Verificar se campo email é válido*/
+    if (/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.test(email)) {
+        erros.push({ mensagem: "Campo email Inválido!" })
+    }
+
+    const user = await Usuario.findByPk(email)
+    const userExists = user instanceof Usuario
+
+    if (userExists) {
+        erros.push({ mensagem: "Email já cadastrado." })
+    }
+
+    if (erros.length > 0) {
+        return res.render('novoUsuario', { error: true, problemas: erros })
+    }
+
+    // Criar senha
+    const salt = await bcrypt.genSalt(12)
+    const senhaHash = await bcrypt.hash(senha, salt)
+
+    //Sucesso (Nenhum Erro) - Salvar no BD
+    await Usuario.create({
+        nome: nome,
+        telefone: tel,
+        email: email.toLowerCase(),
+        senha: senhaHash
+    }).then(function () {
+        console.log('Cadastrado com sucesso!')
+        res.render('login', {msgSucess: 'Cliente Cadastrado com Sucesso.'})
+    }).catch(function (err) {
+        console.log(`Ops, houve um erro: ${err}`)
+        res.redirect('/novoUsuario')
+    })
+   
 
 })
 
