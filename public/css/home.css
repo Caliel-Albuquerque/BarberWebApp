@@ -234,6 +234,16 @@ select{
     animation: alert 0.5s  ease-in-out;
 }
 
+.alert-sucess {
+    position: fixed;
+    left: 0;
+    padding: 0.5rem;
+    background-color: green;
+    color: #fff;
+    font-weight: 700;
+    animation: alert 0.5s  ease-in-out;
+}
+
 @keyframes alert {
     0%{
         opacity: 0;
