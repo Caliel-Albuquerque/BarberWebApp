@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="container_information">
+        <h1>Novo Atendimento</h1>
+    </div>
+
+    <form class="form_atendimento" action="/cadAtendimento" method="post">
+        <label for="opcoesClientes" class="label-input">Cliente</label>
+        <div class="content_inputs">
+            <select class="opcoesServicos" name="opcoesClientes" id="opcoesClientes">
+                {{#each clientes}}
+
+                <option value="{{nome}}">{{nome}}</option>
+
+                {{/each}}
+            </select>
+        </div>
+
+        <label for="opcoesServicos" class="label-input">Serviço</label>
+        <div class="content_inputs">
+            <select class="opcoesServicos" name="opcoesServicos" id="opcoesServicos">
+                {{#each servicos}}
+
+                <option value="{{nome}}">{{nome}}</option>
+
+                {{/each}}
+            </select>
+        </div>
+
+
+        <label for="opcoesValor" class="label-input">Valor</label>
+        <div class="content_inputs">
+            <select class="opcoesValor" name="opcoesValor" id="opcoesValor">
+                {{#each servicos}}
+
+                <option value="{{valor}}">{{valor}}</option>
+
+                {{/each}}
+            </select>
+        </div>
+
+        <label for="data_atendimento" class="label-input">Data do atendimento</label>
+        <div class="content_inputs">
+
+            <input type="text" class="form-control" id="data_atendimento" name="data_atendimento" placeholder="XX/XX/XXXX" required>
+        </div>
+
+        <label for="opcoesPagamento" class="label-input">Forma de pagamento</label>
+        <div class="content_inputs">
+            <select class="opcoesPagamento" name="opcoesPagamento" id="opcoesPagamento">
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+                <option value="pix">Pix</option>
+            </select>
+        </div>
+
+
+        <div class="flex_column options_add_item">
+
+            <a href="/atendimentos"><button type="button" class="btn_option">Cancelar</button></a>
+
+
+            <button type="submit" class="btn_option">Salvar</button>
+        </div>
+
+    </form>
+
+
+
+</div>
