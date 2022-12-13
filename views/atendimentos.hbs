@@ -10,7 +10,7 @@
         </div>
         <div>
             <a href="/in/{{nomeUsuario}}">
-                <h1>Caixa</h1>
+                <h1>Agenda</h1>
             </a>
         </div>
     </div>
@@ -31,14 +31,18 @@
         {{#each atendimentos}}
         <div class="option_card flex_row">
             <div class="col-4 d-flex justify-content-center">
-                <h5>{{nome}}</h5>
+                <h5>{{nomeCliente}}</h5>
+            </div>
+
+            <div class="col-4 d-flex justify-content-center">
+                <h5>{{data_atendimento}}</h5>
             </div>
 
             <div class="edit_item flex_row">
 
                 <div class="update_item">
                     <form action="/editarAtendimento" method="post">
-                        <input type="hidden" name="idCliente" value="{{idAtendimento}}">
+                        <input type="hidden" name="idAtendimento" value="{{idAtendimento}}">
                         <button class="btn"><i class="fas fa-edit"></i></button>
                     </form>
                 </div>
@@ -63,11 +67,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fw-bold text-danger">
-                        Tem certeza que quer deletar o atendimento para {{nome}}?
+                        Tem certeza que quer deletar o atendimento para {{nomeCliente}}?
                     </div>
                     <div class="modal-footer flex_row">
                         <form action="/deletarAtendimento" method="post">
-                            <input type="hidden" name="idCliente" value="{{idAtendimento}}">
+                            <input type="hidden" name="idAtendimento" value="{{idAtendimento}}">
                             <button type="submit" class="btn">Sim, quero deletar!</button>
                         </form>
 
@@ -84,7 +88,7 @@
 
         <div class="bottom_bar flex_row">
 
-            <a href="/atendimentos" class="col-4 py-3">
+            <a href="/novoAtendimento" class="col-4 py-3">
                 <div class="bottom_itens">
                     <i class="fas fa-plus fa-2x"></i>
                     <h5>Novo</h5>
@@ -114,7 +118,7 @@
                 <nav>
                     <ul>
                         <li><i class="uil uil-estate iconMenu"></i><a href="/in/{{nomeUsuario}}">Home</a></li>
-                        <li><i class="uil uil-calender iconMenu"></i><a href="#">Agenda</a></li>
+                        <li><i class="uil uil-calender iconMenu"></i><a href="/atendimentos">Agenda</a></li>
                         <li><i class="uil uil-dollar-alt iconMenu"></i><a href="#">Caixa</a></li>
                         {{!-- <li><i class="uil uil-money-bill iconMenu"></i><a href="#">Formas de pagamento</a></li> --}}
                         <li><i class="uil uil-user iconMenu"></i><a href="/novoCliente">Novo Cliente</a></li>
@@ -124,7 +128,7 @@
 
             <div class="content_logOut">
                 <ul>
-                    <li><i class="uil uil-sign-out-alt iconMenu"></i><a href="/">Sair</a></li>
+                    <li><i class="uil uil-sign-out-alt iconMenu"></i><a href="/logout">Sair</a></li>
                 </ul>
             </div>
 
