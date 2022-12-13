@@ -8,7 +8,11 @@ const Atendimento = db.sequelize.define('atendimento', {
         allowNull: false,
         primaryKey: true
     }, 
-    nome: {
+    nomeCliente: {
+        type: db.Sequelize.STRING(60),
+        allowNull: false
+    },
+    nomeServico: {
         type: db.Sequelize.STRING(60),
         allowNull: false
     },
