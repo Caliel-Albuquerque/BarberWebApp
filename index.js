@@ -581,16 +581,20 @@ app.post('/deletarCliente', (req, res) => {
 
 app.get("/atendimento", async (req, res) => {
     if (req.session.userName) {
-        await Servico.findAll()
+        const nomeUsuario = req.session.userName
+        let servicosCad = await Servico.findAll()
             .then((servicos) => {
-                res.render('venda', {
-                    servicos: servicos.map((servicos) => servicos.toJSON()),
-                    
-                   
-                })
-                console.log(nome)
-            })
-            .catch((err) => console.log(err))
+                return servicos.map((servicos) => servicos.toJSON())
+            }).catch((err) => console.log(err))
+
+        let clientesCad = await Cliente.findAll()
+            .then((clientes) => {
+                return clientes.map((clientes) => clientes.toJSON())
+            }).catch((err) => console.log(err))
+            
+        
+        res.render('venda', { servicos: servicosCad, clientes: clientesCad, nomeUsuario: nomeUsuario })
+
     } else {
         res.redirect('/')
     }
@@ -607,50 +611,54 @@ app.get("/atendimento", async (req, res) => {
 
 
 app.post('/cadAtendimento', (req, res) => {
-    //Valores vindos do formulário
+    if (req.session.userName) {
+        //Valores vindos do formulário
+        //console.log(req.body)
+        let nome = req.body.opcoesClientes
+        let valor = req.body.opcoesValor
+        let dataAtendimento = req.body.data_nasc
+        let formaPag = req.body.opcoesPagamento
 
-   
-    let nome = req.body.name_client
-    let valor = PrecoValue
-    let dataAtendimento = req.body.data_nasc
-    let formaPag = FormaPagValue
+        let erros = []
 
-    let erros = []
+        // Remover espaços em branco 
+        nome = nome.trim()
 
-    /* Remover espaços em branco */
-    nome = nome.trim()
+        // Limpar caracteres especiais 
+        nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
+        nome = nome.trim()
 
-    /* Limpar caracteres especiais */
-    nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
-    nome = nome.trim()
+        // Verificar se está vazio ou não definido 
+        if (nome == '' || typeof nome == undefined || nome == null) {
+            erros.push({ mensagem: "Campo nome não pode ser vazio!" })
+        }
 
-    /* Verificar se está vazio ou não definido */
-    if (nome == '' || typeof nome == undefined || nome == null) {
-        erros.push({ mensagem: "Campo nome não pode ser vazio!" })
+        // Verificar se campo nome é válido (apenas letras)
+        if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
+            erros.push({ mensagem: "Nome Inválido!" })
+        }
+
+        // Verificar se está vazio ou não definido 
+        if (valor == '' || typeof valor == undefined || valor == null) {
+            erros.push({ mensagem: "Campo valor não pode ser vazio!" })
+        }
+
+        //Sucesso (Nenhum Erro) - Salvar no BD
+        Atendimento.create({
+            nome: nome,
+            valor: valor,
+            data_atendimento: dataAtendimento,
+            forma_pag: formaPag
+        }).then(function () {
+            console.log('Cadastrado com sucesso!')
+            return res.redirect('/caixa')
+        }).catch(function (err) {
+            console.log(`Ops, houve um erro: ${err}`)
+        })
+    } else {
+        res.redirect('/')
     }
-
-    /* Verificar se campo nome é válido (apenas letras)*/
-    if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
-        erros.push({ mensagem: "Nome Inválido!" })
-    }
-
-    /* Verificar se está vazio ou não definido */
-    if (valor == '' || typeof valor == undefined || valor == null) {
-        erros.push({ mensagem: "Campo valor não pode ser vazio!" })
-    }
-
-    //Sucesso (Nenhum Erro) - Salvar no BD
-    Atendimento.create({
-        nome: nome,
-        valor: valor,
-        data_atendimento: dataAtendimento,
-        forma_pag: formaPag
-    }).then(function () {
-        console.log('Cadastrado com sucesso!')
-        return res.redirect('/caixa')
-    }).catch(function (err) {
-        console.log(`Ops, houve um erro: ${err}`)
-    })
+    
 })
 /* FIM POST ATENDIMENTO */
 
