@@ -12,7 +12,6 @@ const Cliente = require('./models/Cliente')
 const Usuario = require('./models/Usuario')
 const Servico = require('./models/Servico')
 const Atendimento = require('./models/Atendimento')
-const e = require('express')
 
 // Configuração do Handlebars
 app.engine('hbs', hbs.engine({
@@ -228,7 +227,7 @@ app.get('/servicos', async (req, res) => {
 
 })
 
-app.get('/novoservico', (req, res) => {
+app.get('/novoServico', (req, res) => {
     if (req.session.userName) {
         res.render('novoServico')
     } else {
@@ -380,13 +379,12 @@ app.get('/clientes', async (req, res) => {
     if (req.session.userName) {
         let nomeUsuario = req.session.userName
         const { count, rows } = await Cliente.findAndCountAll()
-        let numClientes = count
 
         await Cliente.findAll()
             .then((cliente) => {
                 res.render('clientes', {
                     cliente: cliente.map((clientes) => clientes.toJSON()),
-                    numCliente: numClientes,
+                    numCliente: count,
                     nomeUsuario: nomeUsuario
                 })
             })
@@ -468,7 +466,7 @@ app.post('/cadCliente', async (req, res) => {
     }
 })
 
-// Exibir serviço a ser editado
+// Exibir Cliente a ser editado
 app.post('/editarCliente', async (req, res) => {
     if (req.session.userName) {
         let idCliente = req.body.idCliente
@@ -493,7 +491,7 @@ app.post('/editarCliente', async (req, res) => {
     }
 })
 
-// Editar serviço
+// Editar Cliente
 app.post('/updateCliente', async (req, res) => {
     if (req.session.userName) {
         //Valores vindos do formulário
@@ -577,9 +575,28 @@ app.post('/deletarCliente', (req, res) => {
     }
 })
 
-// Exibir atendimentos cadastrados
+// Exibir/listar atendimentos cadastrados
+app.get('/atendimentos', async (req, res) => {
+    if (req.session.userName) {
+        let nomeUsuario = req.session.userName
+        const { count, rows } = await Atendimento.findAndCountAll()
 
-app.get("/atendimento", async (req, res) => {
+        await Atendimento.findAll()
+            .then((atendimento) => {
+                res.render('atendimentos', {
+                    atendimentos: atendimento.map((atendimentos) => atendimentos.toJSON()),
+                    numAtendimento: count,
+                    nomeUsuario: nomeUsuario
+                })
+            })
+            .catch((err) => console.log(err))
+    } else {
+        res.redirect('/')
+    }
+})
+
+// Exibir atendimentos cadastrados
+app.get('/novoAtendimento', async (req, res) => {
     if (req.session.userName) {
         const nomeUsuario = req.session.userName
         let servicosCad = await Servico.findAll()
@@ -593,65 +610,33 @@ app.get("/atendimento", async (req, res) => {
             }).catch((err) => console.log(err))
             
         
-        res.render('venda', { servicos: servicosCad, clientes: clientesCad, nomeUsuario: nomeUsuario })
+        res.render('novoAtendimento', { servicos: servicosCad, clientes: clientesCad, nomeUsuario: nomeUsuario })
 
     } else {
         res.redirect('/')
     }
 })
 
-
-
-
-
-
-
-
-//CADASTRO DE ATENDIMENTO
-
-
+//Cadastrar novo Atendimento
 app.post('/cadAtendimento', (req, res) => {
     if (req.session.userName) {
         //Valores vindos do formulário
-        //console.log(req.body)
-        let nome = req.body.opcoesClientes
+        let nomeCliente = req.body.opcoesClientes
+        let nomeServico = req.body.opcoesServicos
         let valor = req.body.opcoesValor
-        let dataAtendimento = req.body.data_nasc
-        let formaPag = req.body.opcoesPagamento
-
-        let erros = []
-
-        // Remover espaços em branco 
-        nome = nome.trim()
-
-        // Limpar caracteres especiais 
-        nome = nome.replace(/[^A-zÀ-ú\s]/gi, '')
-        nome = nome.trim()
-
-        // Verificar se está vazio ou não definido 
-        if (nome == '' || typeof nome == undefined || nome == null) {
-            erros.push({ mensagem: "Campo nome não pode ser vazio!" })
-        }
-
-        // Verificar se campo nome é válido (apenas letras)
-        if (!/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/.test(nome)) {
-            erros.push({ mensagem: "Nome Inválido!" })
-        }
-
-        // Verificar se está vazio ou não definido 
-        if (valor == '' || typeof valor == undefined || valor == null) {
-            erros.push({ mensagem: "Campo valor não pode ser vazio!" })
-        }
+        let data_atendimento = req.body.data_atendimento
+        let forma_pag = req.body.opcoesPagamento
 
         //Sucesso (Nenhum Erro) - Salvar no BD
         Atendimento.create({
-            nome: nome,
+            nomeCliente: nomeCliente,
+            nomeServico: nomeServico,
             valor: valor,
-            data_atendimento: dataAtendimento,
-            forma_pag: formaPag
+            data_atendimento: data_atendimento,
+            forma_pag: forma_pag
         }).then(function () {
             console.log('Cadastrado com sucesso!')
-            return res.redirect('/caixa')
+            return res.redirect('/atendimentos')
         }).catch(function (err) {
             console.log(`Ops, houve um erro: ${err}`)
         })
@@ -660,27 +645,101 @@ app.post('/cadAtendimento', (req, res) => {
     }
     
 })
-/* FIM POST ATENDIMENTO */
 
-app.get('/caixa', async (req, res) => {
+// Exibir atendimento a ser editado
+app.post('/editarAtendimento', async (req, res) => {
     if (req.session.userName) {
-        let nomeUsuario = req.session.userName
-        const { count, rows } = await Atendimento.findAndCountAll()
-        let numAtendimento = count
+        let idAtendimento = req.body.idAtendimento
+        
+        let servicosCad = await Servico.findAll()
+            .then((servicos) => {
+                return servicos.map((servicos) => servicos.toJSON())
+            }).catch((err) => console.log(err))
 
-        await Atendimento.findAll()
-            .then((atendimento) => {
-                res.render('caixa', {
-                    atendimentos: atendimento.map((atendimentos) => atendimentos.toJSON()),
-                    numAtendimento: numAtendimento,
-                    nomeUsuario: nomeUsuario
-                })
+        let clientesCad = await Cliente.findAll()
+            .then((clientes) => {
+                return clientes.map((clientes) => clientes.toJSON())
+            }).catch((err) => console.log(err))
+
+        await Atendimento.findByPk(idAtendimento)
+        .then((dados) => {
+            return res.render('editarAtendimento', {
+                error: false,
+                clientes: clientesCad,
+                servicos: servicosCad,
+                idAtendimento: dados.idAtendimento,
+                //nomeCliente: dados.nomeCliente,
+                //nomeServico: dados.nomeServico,
+                //valorServico: dados.valor,
+                data_atendimento: dados.data_atendimento,
+                //forma_pag: dados.forma_pag,
             })
-            .catch((err) => console.log(err))
+        }).catch((err) => {
+            console.log(err)
+            return res.render(`editarAtendimento`, {
+                error: true,
+                problema: 'Não é possível editar esse registro!',
+            })
+        })
     } else {
         res.redirect('/')
     }
 })
+
+// Editar Atendimento
+app.post('/updateAtendimento', async (req, res) => {
+    if (req.session.userName) {
+        //Valores vindos do formulário
+        let idAtendimento = req.body.idAtendimento
+        let nomeCliente = req.body.opcoesClientes
+        let nomeServico = req.body.opcoesServicos
+        let valor = req.body.opcoesValor
+        let data_atendimento = req.body.data_atendimento
+        let forma_pag = req.body.opcoesPagamento
+
+        await Atendimento.update({
+            nomeCliente: nomeCliente,
+            nomeServico: nomeServico,
+            valor: valor,
+            data_atendimento: data_atendimento,
+            forma_pag: forma_pag
+        },
+            {
+                where: {
+                    idAtendimento: idAtendimento
+                }
+            }).then((resultado) => {
+                console.log(resultado)
+                return res.redirect(`/atendimentos`)
+            }).catch((err) => {
+                console.log(err)
+            })
+    } else {
+        res.redirect('/')
+    }
+})
+
+// Deletar Atendimento
+app.post('/deletarAtendimento', (req, res) => {
+    if (req.session.userName) {
+        let idAtendimento = req.body.idAtendimento
+        Atendimento.destroy({
+            where: {
+                idAtendimento: idAtendimento
+            }
+        }).then(() => {
+            return res.redirect(`/atendimentos`)
+        }).catch((err) => {
+            console.log(err)
+        })
+    } else {
+        res.redirect('/')
+    }
+})
+
+
+
+
 
 // Logout - Encerrar Sessão
 app.get('/logout', (req, res) => {
